@@ -116,7 +116,7 @@ app.use(hpp());
 
 // CORS configuration
 const corsOptions = {
-  origin: config.cors.allowedOrigins || ['http://localhost:3000', 'http://localhost:5000'],
+  origin: config.security?.cors?.allowedOrigins || ['http://localhost:3000', 'http://localhost:8000'],
   credentials: true,
   optionsSuccessStatus: 200,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],

@@ -162,6 +162,18 @@ const config = {
     strategy: process.env.CACHE_STRATEGY || 'lru' // lru, fifo, random
   },
 
+  security: {
+    cors: {
+      allowedOrigins: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['http://localhost:3000', 'http://localhost:8000'],
+      allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+      credentials: true,
+      maxAge: 86400
+    },
+    rateLimitMaxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100,
+    trustProxy: process.env.TRUST_PROXY === 'true'
+  },
+
   monitoring: {
     enabled: process.env.MONITORING_ENABLED === 'true',
     sentry: {

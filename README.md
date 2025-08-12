@@ -2,6 +2,24 @@
 
 Modern, scalable e-commerce platform for bicycle enthusiasts built with cutting-edge technologies.
 
+## 🚀 **Quick Access (Click to open)**
+
+| Service | URL | Status |
+|---------|-----|--------|
+| 🌐 **Website** | [http://localhost:8000](http://localhost:8000) | ✅ Ready |
+| 🔧 **Backend** | [http://localhost:5000](http://localhost:5000) | ✅ Ready |
+| 📚 **API Docs** | [http://localhost:5000/api-docs](http://localhost:5000/api-docs) | ✅ Ready |
+
+## 📋 **Quick Start Commands**
+
+```bash
+# Start Backend (Terminal 1)
+cd backend && node server.js
+
+# Start Frontend (Terminal 2)  
+cd frontend && python3 -m http.server 8000
+```
+
 ![BikerHUB](https://img.shields.io/badge/BikerHUB-v2.0.0-blue?style=for-the-badge&logo=bike)
 ![Node.js](https://img.shields.io/badge/Node.js-18+-green?style=for-the-badge&logo=node.js)
 ![MongoDB](https://img.shields.io/badge/MongoDB-7.0+-green?style=for-the-badge&logo=mongodb)
@@ -65,6 +83,139 @@ Modern, scalable e-commerce platform for bicycle enthusiasts built with cutting-
 - Redis 7.2+
 - Docker & Docker Compose (recommended)
 
+### **🚀 Get Started in 2 Minutes**
+
+1. **Clone & Install:**
+   ```bash
+   git clone https://github.com/Tson28/biker--shop.git
+   cd biker--shop
+   cd backend && npm install
+   ```
+
+2. **Start Services:**
+   ```bash
+   # Terminal 1: Backend
+   cd backend && node server.js
+   
+   # Terminal 2: Frontend  
+   cd frontend && python3 -m http.server 8000
+   ```
+
+3. **Open in Browser:**
+   - 🌐 **Website**: [http://localhost:8000](http://localhost:8000)
+   - 🔧 **API**: [http://localhost:5000](http://localhost:5000)
+   - 📚 **Docs**: [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
+
+## 🌐 **How to Access & Run the Application**
+
+### **Method 1: Run Both Services (Recommended)**
+
+1. **Start Backend Server:**
+   ```bash
+   cd backend
+   npm install
+   node server.js
+   ```
+   - Backend will run on: **http://localhost:5000**
+   - API Documentation: **http://localhost:5000/api-docs**
+   - Health Check: **http://localhost:5000/health**
+
+2. **Start Frontend Server:**
+   ```bash
+   cd frontend
+   python3 -m http.server 8000
+   ```
+   - Website will be available at: **http://localhost:8000**
+
+3. **Access Points:**
+   - 🌐 **Main Website**: http://localhost:8000
+   - 🔧 **Backend API**: http://localhost:5000
+   - 📚 **API Docs**: http://localhost:5000/api-docs
+   - ✅ **Health Check**: http://localhost:5000/health
+
+### **Method 2: Docker (Alternative)**
+
+1. **Start all services:**
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Access the application:**
+   - Frontend: http://localhost
+   - Backend API: http://localhost:5000
+   - API Docs: http://localhost:5000/api-docs
+
+### **Method 3: Frontend Only (Static Files)**
+
+1. **Open directly in browser:**
+   ```bash
+   cd frontend
+   # Double-click index.html or open in browser
+   ```
+
+2. **Or use any local server:**
+   ```bash
+   cd frontend
+   # Using Python
+   python3 -m http.server 8000
+   
+   # Using Node.js
+   npx serve -s . -p 8000
+   
+   # Using PHP
+   php -S localhost:8000
+   ```
+
+## 🎯 **Quick Access Guide**
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| 🏠 **Website** | http://localhost:8000 | Main BikerHUB website |
+| 🔧 **Backend** | http://localhost:5000 | API server |
+| 📚 **API Docs** | http://localhost:5000/api-docs | Interactive API documentation |
+| ✅ **Health** | http://localhost:5000/health | Server status check |
+| 🔐 **Auth API** | http://localhost:5000/api/auth | Authentication endpoints |
+| 👥 **Users API** | http://localhost:5000/api/users | User management |
+| 🚲 **Products API** | http://localhost:5000/api/products | Product catalog |
+| 📦 **Orders API** | http://localhost:5000/api/orders | Order management |
+
+## 🚨 **Troubleshooting**
+
+### **Port 8000 Not Accessible:**
+```bash
+# Check if port is in use
+lsof -i :8000
+
+# Kill process if needed
+kill -9 <PID>
+
+# Restart frontend server
+cd frontend
+python3 -m http.server 8000
+```
+
+### **Port 5000 Not Accessible:**
+```bash
+# Check if port is in use
+lsof -i :5000
+
+# Kill process if needed
+kill -9 <PID>
+
+# Restart backend server
+cd backend
+node server.js
+```
+
+### **MongoDB Connection Issues:**
+```bash
+# Check MongoDB status
+brew services list | grep mongodb
+
+# Start MongoDB if not running
+brew services start mongodb-community
+```
+
 ### **Option 1: Docker (Recommended)**
 
 1. **Clone the repository**
@@ -94,14 +245,18 @@ Modern, scalable e-commerce platform for bicycle enthusiasts built with cutting-
    cp .env.example .env
    # Edit .env with your configuration
    npm run dev
+   # Or run directly: node server.js
    ```
 
 2. **Frontend Setup**
    ```bash
    cd frontend
-   # Open index.html in your browser
-   # Or use a local server
-   python -m http.server 8000
+   # Option A: Open directly in browser
+   # Double-click index.html or open in browser
+   
+   # Option B: Use local server (recommended)
+   python3 -m http.server 8000
+   # Website will be available at: http://localhost:8000
    ```
 
 ## 📁 Project Structure
