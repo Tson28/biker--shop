@@ -1,260 +1,377 @@
-# 🚀 BikerHUB Backend API
+# 🚀 BikerHUB Backend API v2.0
 
-Backend API hoàn chỉnh cho nền tảng thương mại điện tử BikerHUB, được xây dựng với Node.js, Express và MongoDB.
+Modern, scalable backend API for the BikerHUB e-commerce platform built with Node.js, Express, and MongoDB.
 
-## ✨ Tính Năng Chính
+## ✨ Features
 
-- **🔐 Authentication & Authorization**: JWT tokens, role-based access control
-- **👥 User Management**: Đăng ký, đăng nhập, quản lý profile
-- **🏪 Product Management**: CRUD sản phẩm, tìm kiếm, lọc
-- **🛒 Order Management**: Quản lý đơn hàng, trạng thái, lịch sử
-- **💳 Payment Integration**: Stripe, PayPal, xử lý thanh toán
-- **📁 File Upload**: Cloudinary, AWS S3, xử lý hình ảnh
-- **📧 Email Services**: Nodemailer, xác thực email
-- **🔍 Search & Filter**: Full-text search, lọc nâng cao
-- **📊 Analytics**: Thống kê đơn hàng, doanh thu
-- **🔒 Security**: Rate limiting, CORS, Helmet, validation
+### 🏗️ **Architecture & Performance**
+- **Modern ES6+ Syntax** with ES modules
+- **Multi-stage Docker builds** for optimized production images
+- **Advanced caching** with Redis
+- **Database optimization** and health monitoring
+- **Performance monitoring** and analytics
+- **Graceful shutdown** handling
 
-## 🛠️ Công Nghệ Sử Dụng
+### 🔒 **Security & Reliability**
+- **JWT authentication** with refresh tokens
+- **Rate limiting** and DDoS protection
+- **Input validation** and sanitization
+- **XSS protection** and security headers
+- **CORS configuration** with whitelist
+- **Session management** with Redis
+- **Password hashing** with bcrypt
 
-- **Runtime**: Node.js (>=16.0.0)
-- **Framework**: Express.js
-- **Database**: MongoDB với Mongoose
-- **Authentication**: JWT, bcryptjs
-- **Validation**: express-validator, Joi
-- **File Upload**: Multer, Sharp, Cloudinary
-- **Payment**: Stripe
-- **Email**: Nodemailer
-- **Logging**: Winston
-- **Security**: Helmet, CORS, Rate Limiting
+### 📊 **Monitoring & Logging**
+- **Structured logging** with Winston
+- **Request/response logging** with Morgan
+- **Performance metrics** tracking
+- **Health checks** for all services
+- **Error tracking** and reporting
+- **Audit trails** for security events
 
-## 📁 Cấu Trúc Thư Mục
+### 🚀 **Development Experience**
+- **Hot reloading** with Nodemon
+- **ESLint** and **Prettier** configuration
+- **Comprehensive testing** setup with Jest
+- **API documentation** with Swagger/OpenAPI
+- **TypeScript support** (optional)
+- **Debug logging** in development
+
+### 📈 **Business Features**
+- **User management** with roles and permissions
+- **Product catalog** with search and filtering
+- **Order management** with status tracking
+- **Payment processing** with Stripe/PayPal
+- **File uploads** with image processing
+- **Email notifications** with templates
+- **Analytics** and reporting
+
+## 🛠️ Tech Stack
+
+### **Core Technologies**
+- **Node.js 18+** - JavaScript runtime
+- **Express.js 4.18+** - Web framework
+- **MongoDB 7.0+** - NoSQL database
+- **Mongoose 8.0+** - ODM for MongoDB
+- **Redis 7.2+** - In-memory data store
+
+### **Security & Middleware**
+- **Helmet** - Security headers
+- **CORS** - Cross-origin resource sharing
+- **Rate Limiting** - Request throttling
+- **JWT** - JSON Web Tokens
+- **bcryptjs** - Password hashing
+- **express-validator** - Input validation
+
+### **File Handling & Storage**
+- **Multer** - File upload handling
+- **Sharp** - Image processing
+- **Cloudinary** - Cloud image storage
+- **AWS S3** - Alternative storage option
+
+### **Payment & External Services**
+- **Stripe** - Payment processing
+- **PayPal** - Alternative payment
+- **Nodemailer** - Email services
+- **Twilio** - SMS notifications
+
+### **Development Tools**
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Jest** - Testing framework
+- **Nodemon** - Development server
+- **Swagger** - API documentation
+
+## 📁 Project Structure
 
 ```
 backend/
-├── config/           # Cấu hình database, environment
-├── controllers/      # Logic xử lý business
-├── middleware/       # Middleware functions
-├── models/          # MongoDB schemas
-├── routes/          # API endpoints
-├── utils/           # Utility functions
-├── uploads/         # File uploads
-├── logs/            # Application logs
-├── server.js        # Entry point
-├── package.json     # Dependencies
-└── README.md        # Documentation
+├── config/                 # Configuration files
+│   ├── config.js          # Main configuration
+│   └── database.js        # Database connection
+├── controllers/            # Route controllers
+│   ├── authController.js  # Authentication logic
+│   ├── userController.js  # User management
+│   ├── productController.js # Product operations
+│   └── orderController.js # Order management
+├── middleware/             # Custom middleware
+│   ├── auth.js            # Authentication middleware
+│   ├── validation.js      # Input validation
+│   └── errorHandler.js    # Error handling
+├── models/                 # Database models
+│   ├── User.js            # User schema
+│   ├── Product.js         # Product schema
+│   └── Order.js           # Order schema
+├── routes/                 # API routes
+│   ├── auth.js            # Authentication routes
+│   ├── users.js           # User routes
+│   ├── products.js        # Product routes
+│   └── orders.js          # Order routes
+├── utils/                  # Utility functions
+│   ├── logger.js          # Logging configuration
+│   ├── swagger.js         # API documentation
+│   └── cron.js            # Scheduled tasks
+├── uploads/                # File uploads
+├── logs/                   # Application logs
+├── temp/                   # Temporary files
+├── tests/                  # Test files
+├── Dockerfile              # Docker configuration
+├── package.json            # Dependencies
+└── server.js               # Main application
 ```
 
-## 🚀 Cài Đặt & Chạy
+## 🚀 Quick Start
 
-### 1. Cài Đặt Dependencies
+### **Prerequisites**
+- Node.js 18+ and npm 9+
+- MongoDB 7.0+
+- Redis 7.2+
+- Docker & Docker Compose (optional)
 
-```bash
-cd backend
-npm install
-```
+### **Installation**
 
-### 2. Cấu Hình Environment
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Tson28/biker--shop.git
+   cd biker--shop/backend
+   ```
 
-Tạo file `.env` từ `.env.example`:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```bash
-cp .env.example .env
-```
+3. **Environment setup**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
 
-Cập nhật các biến môi trường:
+4. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+### **Docker Setup**
+
+1. **Build and start services**
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **View logs**
+   ```bash
+   docker-compose logs -f backend
+   ```
+
+3. **Stop services**
+   ```bash
+   docker-compose down
+   ```
+
+## 🔧 Configuration
+
+### **Environment Variables**
+
+Create a `.env` file in the backend directory:
 
 ```env
+# Server
 NODE_ENV=development
 PORT=5000
+SESSION_SECRET=your-secret-key
+
+# Database
 MONGODB_URI=mongodb://localhost:27017/bikerhub
-JWT_SECRET=your-super-secret-jwt-key
+
+# Redis
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=
+
+# JWT
+JWT_SECRET=your-jwt-secret
+JWT_EXPIRES_IN=7d
+
+# Email
+EMAIL_HOST=smtp.gmail.com
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-password
+
+# Payment
+STRIPE_SECRET_KEY=your-stripe-key
+CLOUDINARY_CLOUD_NAME=your-cloud-name
 ```
 
-### 3. Khởi Động MongoDB
+### **Development vs Production**
 
-```bash
-# Local MongoDB
-mongod
+The application automatically adjusts configuration based on `NODE_ENV`:
 
-# Hoặc sử dụng Docker
-docker run -d -p 27017:27017 --name mongodb mongo:latest
-```
+- **Development**: Debug logging, relaxed rate limits, console output
+- **Production**: Error logging only, strict rate limits, file logging
 
-### 4. Chạy Backend
+## 📚 API Documentation
 
-```bash
-# Development mode
-npm run dev
+### **Swagger UI**
+- **Development**: http://localhost:5000/api-docs
+- **Production**: https://api.bikerhub.com/api-docs
 
-# Production mode
-npm start
-```
+### **API Endpoints**
 
-## 📚 API Endpoints
+#### **Authentication**
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `POST /api/auth/logout` - User logout
+- `POST /api/auth/refresh` - Refresh token
+- `POST /api/auth/forgot-password` - Password reset
 
-### Authentication
-- `POST /api/auth/register` - Đăng ký người dùng mới
-- `POST /api/auth/login` - Đăng nhập
-- `POST /api/auth/logout` - Đăng xuất
-- `GET /api/auth/me` - Lấy thông tin profile
-- `PUT /api/auth/me` - Cập nhật profile
-- `POST /api/auth/change-password` - Đổi mật khẩu
-- `POST /api/auth/forgot-password` - Quên mật khẩu
-- `POST /api/auth/reset-password` - Reset mật khẩu
+#### **Users**
+- `GET /api/users/profile` - Get user profile
+- `PUT /api/users/profile` - Update profile
+- `GET /api/users/:id` - Get user by ID (admin)
+- `PUT /api/users/:id` - Update user (admin)
 
-### Users
-- `GET /api/users` - Lấy danh sách người dùng (Admin)
-- `GET /api/users/:id` - Lấy thông tin người dùng
-- `PUT /api/users/:id` - Cập nhật người dùng
-- `DELETE /api/users/:id` - Xóa người dùng (Admin)
+#### **Products**
+- `GET /api/products` - List products
+- `POST /api/products` - Create product (admin)
+- `GET /api/products/:id` - Get product details
+- `PUT /api/products/:id` - Update product (admin)
+- `DELETE /api/products/:id` - Delete product (admin)
 
-### Products
-- `GET /api/products` - Lấy danh sách sản phẩm
-- `GET /api/products/:id` - Lấy chi tiết sản phẩm
-- `POST /api/products` - Tạo sản phẩm mới
-- `PUT /api/products/:id` - Cập nhật sản phẩm
-- `DELETE /api/products/:id` - Xóa sản phẩm
-- `GET /api/products/search` - Tìm kiếm sản phẩm
-- `GET /api/products/featured` - Sản phẩm nổi bật
-- `GET /api/products/trending` - Sản phẩm trending
-
-### Orders
-- `GET /api/orders` - Lấy danh sách đơn hàng
-- `GET /api/orders/:id` - Lấy chi tiết đơn hàng
-- `POST /api/orders` - Tạo đơn hàng mới
-- `PUT /api/orders/:id/status` - Cập nhật trạng thái
-- `POST /api/orders/:id/cancel` - Hủy đơn hàng
-- `POST /api/orders/:id/refund` - Xử lý hoàn tiền
-
-### Payments
-- `POST /api/payments/create-intent` - Tạo payment intent
-- `POST /api/payments/confirm` - Xác nhận thanh toán
-- `POST /api/payments/refund` - Hoàn tiền
-- `GET /api/payments/history` - Lịch sử thanh toán
-
-### Uploads
-- `POST /api/uploads/image` - Upload hình ảnh
-- `POST /api/uploads/document` - Upload tài liệu
-- `DELETE /api/uploads/:id` - Xóa file
-
-## 🔐 Authentication
-
-### JWT Token
-
-```bash
-# Include token in headers
-Authorization: Bearer <your-jwt-token>
-
-# Or in cookies
-token: <your-jwt-token>
-```
-
-### Role-based Access
-
-- **user**: Người dùng thông thường
-- **moderator**: Quản lý nội dung
-- **admin**: Quản trị viên hệ thống
-
-## 📊 Database Models
-
-### User
-- Thông tin cá nhân, địa chỉ
-- Preferences, wishlist, reviews
-- Role-based permissions
-- Security features (login attempts, account lock)
-
-### Product
-- Thông tin sản phẩm chi tiết
-- Images, specifications, features
-- Stock management, pricing
-- SEO optimization, categories
-
-### Order
-- Order items, customer details
-- Shipping & billing addresses
-- Payment information
-- Status tracking, history
-
-## 🚀 Deployment
-
-### Production Environment
-
-```bash
-# Set environment variables
-NODE_ENV=production
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/bikerhub
-
-# Install dependencies
-npm ci --only=production
-
-# Start server
-npm start
-```
-
-### Docker Deployment
-
-```dockerfile
-FROM node:16-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-EXPOSE 5000
-CMD ["npm", "start"]
-```
+#### **Orders**
+- `GET /api/orders` - List user orders
+- `POST /api/orders` - Create order
+- `GET /api/orders/:id` - Get order details
+- `PUT /api/orders/:id/status` - Update order status
 
 ## 🧪 Testing
 
+### **Run Tests**
 ```bash
-# Run tests
+# All tests
 npm test
 
-# Run tests with coverage
+# Watch mode
+npm run test:watch
+
+# Coverage report
 npm run test:coverage
 
-# Run specific test file
-npm test -- --grep "User"
+# Specific test file
+npm test -- --testPathPattern=auth
 ```
 
-## 📝 Logging
+### **Test Structure**
+- **Unit tests** for controllers and utilities
+- **Integration tests** for API endpoints
+- **Database tests** with test database
+- **Mock services** for external APIs
 
-Backend sử dụng Winston để logging:
+## 📊 Monitoring & Health Checks
 
-- **Console**: Development mode
-- **Files**: Production mode (combined.log, error.log)
-- **Levels**: error, warn, info, debug
+### **Health Endpoints**
+- `GET /health` - Application health
+- `GET /health/db` - Database health
+- `GET /health/redis` - Redis health
+
+### **Metrics**
+- Request/response times
+- Database query performance
+- Memory usage
+- Error rates
+- API usage statistics
 
 ## 🔒 Security Features
 
-- **Rate Limiting**: Giới hạn số request
-- **CORS**: Cross-origin resource sharing
-- **Helmet**: Security headers
-- **Input Validation**: Sanitize user input
-- **JWT**: Secure token-based authentication
-- **Password Hashing**: bcryptjs encryption
+### **Authentication & Authorization**
+- JWT-based authentication
+- Role-based access control
+- Session management
+- Password policies
 
-## 📞 Support
+### **Data Protection**
+- Input validation and sanitization
+- SQL injection prevention
+- XSS protection
+- CSRF protection
 
-Nếu có vấn đề hoặc câu hỏi:
+### **Rate Limiting**
+- IP-based rate limiting
+- User-based rate limiting
+- Adaptive rate limiting
+- DDoS protection
 
-1. Kiểm tra logs trong thư mục `logs/`
-2. Xem MongoDB connection
-3. Verify environment variables
-4. Check API endpoints với Postman/Insomnia
+## 🚀 Deployment
+
+### **Production Checklist**
+- [ ] Environment variables configured
+- [ ] SSL certificates installed
+- [ ] Database backups configured
+- [ ] Monitoring enabled
+- [ ] Log rotation configured
+- [ ] Health checks enabled
+
+### **Docker Deployment**
+```bash
+# Build production image
+docker build -t bikerhub-backend:latest .
+
+# Run with environment variables
+docker run -d \
+  --name bikerhub-backend \
+  -p 5000:5000 \
+  --env-file .env \
+  bikerhub-backend:latest
+```
+
+### **Environment-Specific Configs**
+- **Development**: Local MongoDB, Redis, and services
+- **Staging**: Staging database, limited external services
+- **Production**: Production database, full external services
 
 ## 🤝 Contributing
 
-1. Fork repository
-2. Tạo feature branch
-3. Commit changes
-4. Push to branch
-5. Tạo Pull Request
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Ensure all tests pass
+6. Submit a pull request
+
+### **Code Style**
+- Use ESLint and Prettier
+- Follow ES6+ best practices
+- Write comprehensive tests
+- Document new endpoints
 
 ## 📄 License
 
-MIT License - xem file LICENSE để biết thêm chi tiết.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Documentation**: [API Docs](http://localhost:5000/api-docs)
+- **Issues**: [GitHub Issues](https://github.com/Tson28/biker--shop/issues)
+- **Email**: support@bikerhub.com
+
+## 🔄 Changelog
+
+### **v2.0.0** (Current)
+- Modern ES6+ syntax with ES modules
+- Enhanced security features
+- Advanced monitoring and logging
+- Multi-stage Docker builds
+- Comprehensive testing setup
+- API documentation with Swagger
+- Performance optimizations
+
+### **v1.0.0**
+- Initial release
+- Basic CRUD operations
+- JWT authentication
+- File uploads
+- Payment integration
 
 ---
 
-**BikerHUB Backend** - Xây dựng với ❤️ cho cộng đồng xe đạp!
+**Built with ❤️ by the BikerHUB Team**

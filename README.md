@@ -1,398 +1,316 @@
-# 🚴‍♂️ BikerHUB - Full Stack E-commerce Platform
+# 🚀 BikerHUB - Full-Stack E-commerce Platform
 
-**BikerHUB** là một nền tảng thương mại điện tử hoàn chỉnh dành cho việc mua bán xe đạp và phụ kiện, được xây dựng với kiến trúc full-stack hiện đại.
+Modern, scalable e-commerce platform for bicycle enthusiasts built with cutting-edge technologies.
 
-## ✨ Tính Năng Chính
+![BikerHUB](https://img.shields.io/badge/BikerHUB-v2.0.0-blue?style=for-the-badge&logo=bike)
+![Node.js](https://img.shields.io/badge/Node.js-18+-green?style=for-the-badge&logo=node.js)
+![MongoDB](https://img.shields.io/badge/MongoDB-7.0+-green?style=for-the-badge&logo=mongodb)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker)
 
-### 🛒 E-commerce Features
-- **Product Management**: Quản lý sản phẩm với hình ảnh, mô tả chi tiết
-- **Shopping Cart**: Giỏ hàng hoàn chỉnh với localStorage
-- **Order Processing**: Quy trình đặt hàng và thanh toán
-- **User Management**: Hệ thống đăng ký, đăng nhập, profile
-- **Admin Panel**: Bảng điều khiển quản trị với phân quyền
-- **Search & Filter**: Tìm kiếm và lọc sản phẩm nâng cao
-- **Wishlist**: Danh sách yêu thích
-- **Reviews & Ratings**: Đánh giá và nhận xét sản phẩm
+## ✨ Features
 
-### 🔐 Security & Authentication
-- **JWT Authentication**: Xác thực người dùng an toàn
-- **Role-based Access**: Phân quyền user, moderator, admin
-- **Password Security**: Mã hóa mật khẩu với bcryptjs
-- **Rate Limiting**: Giới hạn request để bảo vệ API
-- **Input Validation**: Kiểm tra và làm sạch dữ liệu đầu vào
+### 🎨 **Frontend (Modern Web App)**
+- **Responsive Design** - Mobile-first approach with modern UI/UX
+- **Advanced Animations** - Smooth transitions and micro-interactions
+- **Real-time Updates** - Live cart updates and notifications
+- **Progressive Web App** - Offline support and app-like experience
+- **Advanced Search** - Smart filtering, sorting, and search
+- **Wishlist Management** - Save and organize favorite products
+- **Order Tracking** - Real-time order status updates
 
-### 📱 User Experience
-- **Responsive Design**: Tối ưu cho mọi thiết bị
-- **Modern UI/UX**: Giao diện đẹp mắt với animations
-- **Quick View**: Xem nhanh sản phẩm không cần rời trang
-- **Real-time Updates**: Cập nhật giỏ hàng và trạng thái real-time
-- **Accessibility**: Hỗ trợ người dùng khuyết tật
+### 🚀 **Backend (Scalable API)**
+- **Modern ES6+ Architecture** - ES modules and async/await
+- **Advanced Security** - JWT, rate limiting, input validation
+- **Performance Monitoring** - Real-time metrics and health checks
+- **Automated Tasks** - Cron jobs for maintenance and analytics
+- **Comprehensive Logging** - Structured logging with Winston
+- **API Documentation** - Interactive Swagger/OpenAPI docs
+- **Database Optimization** - Advanced MongoDB features
 
-## 🏗️ Kiến Trúc Hệ Thống
+### 🐳 **Infrastructure (Production Ready)**
+- **Multi-stage Docker** - Optimized production images
+- **Container Orchestration** - Docker Compose with health checks
+- **Reverse Proxy** - Nginx with SSL termination
+- **Database Clustering** - MongoDB with Redis caching
+- **Monitoring** - Health checks and performance metrics
+- **Auto-scaling** - Ready for Kubernetes deployment
 
-### Frontend (Client-side)
-- **HTML5 & CSS3**: Cấu trúc và styling hiện đại
-- **Vanilla JavaScript**: ES6+ với classes và modules
-- **Responsive Grid**: CSS Grid và Flexbox
-- **CSS Variables**: Hệ thống design tokens nhất quán
-- **Animations**: CSS transitions, keyframes, và Intersection Observer
+## 🛠️ Tech Stack
 
-### Backend (Server-side)
-- **Node.js**: Runtime environment
-- **Express.js**: Web framework
-- **MongoDB**: NoSQL database với Mongoose ODM
-- **Redis**: Caching và session management
-- **JWT**: JSON Web Tokens cho authentication
-- **RESTful API**: API endpoints chuẩn REST
+### **Frontend Technologies**
+- **HTML5** - Semantic markup and accessibility
+- **CSS3** - Modern layouts with Grid, Flexbox, and CSS Variables
+- **Vanilla JavaScript** - ES6+ with modules and classes
+- **Progressive Web App** - Service workers and offline support
 
-### Infrastructure
-- **Docker**: Containerization
-- **Docker Compose**: Multi-container orchestration
-- **Nginx**: Reverse proxy và static file serving
-- **MongoDB Express**: Database admin interface
-- **Redis Commander**: Redis admin interface
+### **Backend Technologies**
+- **Node.js 18+** - Latest LTS with ES modules
+- **Express.js 4.18+** - Fast, unopinionated web framework
+- **MongoDB 7.0+** - NoSQL database with advanced features
+- **Redis 7.2+** - In-memory data store for caching
+- **JWT** - Secure authentication and authorization
 
-## 📁 Cấu Trúc Dự Án
+### **Development Tools**
+- **ESLint & Prettier** - Code quality and formatting
+- **Jest** - Comprehensive testing framework
+- **Swagger** - API documentation and testing
+- **Docker** - Containerization and deployment
+- **Git** - Version control and collaboration
 
-```
-Biker-HUB-Full-Stack-website-development-project/
-├── frontend/                 # Frontend files
-│   ├── index.html           # Trang chủ
-│   ├── bikes.html           # Trang sản phẩm
-│   ├── sell.html            # Trang bán xe
-│   ├── checkout.html        # Trang thanh toán
-│   ├── orders.html          # Trang đơn hàng
-│   ├── login.html           # Trang đăng nhập
-│   ├── signup.html          # Trang đăng ký
-│   ├── style.css            # CSS chung
-│   └── script.js            # JavaScript chung
-├── backend/                  # Backend API
-│   ├── config/              # Cấu hình
-│   ├── controllers/         # Business logic
-│   ├── middleware/          # Middleware functions
-│   ├── models/              # Database schemas
-│   ├── routes/              # API endpoints
-│   ├── utils/               # Utility functions
-│   ├── uploads/             # File uploads
-│   ├── logs/                # Application logs
-│   ├── server.js            # Entry point
-│   ├── package.json         # Dependencies
-│   ├── Dockerfile           # Container config
-│   └── README.md            # Backend docs
-├── docker-compose.yml       # Docker orchestration
-└── README.md                # Project documentation
-```
+## 🚀 Quick Start
 
-## 🚀 Cài Đặt & Chạy
+### **Prerequisites**
+- Node.js 18+ and npm 9+
+- MongoDB 7.0+
+- Redis 7.2+
+- Docker & Docker Compose (recommended)
 
-### Prerequisites
-- **Node.js** >= 16.0.0
-- **Docker** & Docker Compose
-- **MongoDB** (local hoặc cloud)
-- **Git**
+### **Option 1: Docker (Recommended)**
 
-### Quick Start với Docker
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Tson28/biker--shop.git
+   cd biker--shop
+   ```
 
-1. **Clone repository**
-```bash
-git clone <repository-url>
-cd Biker-HUB-Full-Stack-website-development-project
-```
+2. **Start all services**
+   ```bash
+   docker-compose up -d
+   ```
 
-2. **Chạy toàn bộ hệ thống**
-```bash
-docker-compose up -d
-```
+3. **Access the application**
+   - Frontend: http://localhost
+   - Backend API: http://localhost:5000
+   - API Docs: http://localhost:5000/api-docs
+   - MongoDB Admin: http://localhost:8081
+   - Redis Admin: http://localhost:8082
 
-3. **Truy cập ứng dụng**
-- Frontend: http://localhost
-- Backend API: http://localhost:5000
-- MongoDB Admin: http://localhost:8081
-- Redis Admin: http://localhost:8082
-
-### Development Setup
+### **Option 2: Local Development**
 
 1. **Backend Setup**
-```bash
-cd backend
-npm install
-npm run dev
-```
+   ```bash
+   cd backend
+   npm install
+   cp .env.example .env
+   # Edit .env with your configuration
+   npm run dev
+   ```
 
 2. **Frontend Setup**
-```bash
-# Mở các file HTML trong browser
-# Hoặc sử dụng live server
-npx live-server frontend/
+   ```bash
+   cd frontend
+   # Open index.html in your browser
+   # Or use a local server
+   python -m http.server 8000
+   ```
+
+## 📁 Project Structure
+
+```
+BikerHUB-Full-Stack-website-development-project/
+├── frontend/                    # Frontend application
+│   ├── index.html              # Homepage
+│   ├── bikes.html              # Product catalog
+│   ├── login.html              # Authentication
+│   ├── signup.html             # User registration
+│   ├── sell.html               # Sell your bike
+│   ├── checkout.html           # Checkout process
+│   ├── orders.html             # Order management
+│   ├── style.css               # Modern CSS with variables
+│   └── script.js               # ES6+ JavaScript classes
+├── backend/                     # Backend API
+│   ├── config/                 # Configuration files
+│   ├── controllers/            # Business logic
+│   ├── middleware/             # Custom middleware
+│   ├── models/                 # Database schemas
+│   ├── routes/                 # API endpoints
+│   ├── utils/                  # Utility functions
+│   ├── uploads/                # File uploads
+│   ├── logs/                   # Application logs
+│   ├── server.js               # Main application
+│   ├── package.json            # Dependencies
+│   └── Dockerfile              # Container configuration
+├── nginx/                      # Reverse proxy configuration
+├── docker-compose.yml          # Service orchestration
+├── .gitignore                  # Git ignore rules
+└── README.md                   # Project documentation
 ```
 
-3. **Database Setup**
-```bash
-# Local MongoDB
-mongod
+## 🔧 Configuration
 
-# Hoặc Docker
-docker run -d -p 27017:27017 --name mongodb mongo:latest
+### **Environment Variables**
+
+Create environment files for different environments:
+
+```bash
+# Development
+cp backend/.env.example backend/.env
+
+# Production
+cp backend/.env.example backend/.env.production
 ```
+
+### **Key Configuration Options**
+
+- **Database**: MongoDB connection and options
+- **Redis**: Caching and session storage
+- **JWT**: Authentication and security
+- **Email**: SMTP configuration for notifications
+- **Payment**: Stripe and PayPal integration
+- **Storage**: Cloudinary or AWS S3 for files
+- **Monitoring**: Sentry and New Relic integration
 
 ## 📚 API Documentation
 
-### Base URL
-```
-http://localhost:5000/api
-```
+### **Interactive API Docs**
+- **Swagger UI**: http://localhost:5000/api-docs
+- **OpenAPI Spec**: http://localhost:5000/api-docs.json
 
-### Authentication Endpoints
-- `POST /auth/register` - Đăng ký người dùng
-- `POST /auth/login` - Đăng nhập
-- `POST /auth/logout` - Đăng xuất
-- `GET /auth/me` - Thông tin profile
-- `PUT /auth/me` - Cập nhật profile
-
-### Product Endpoints
-- `GET /products` - Danh sách sản phẩm
-- `GET /products/:id` - Chi tiết sản phẩm
-- `POST /products` - Tạo sản phẩm mới
-- `PUT /products/:id` - Cập nhật sản phẩm
-- `DELETE /products/:id` - Xóa sản phẩm
-- `GET /products/search` - Tìm kiếm sản phẩm
-
-### Order Endpoints
-- `GET /orders` - Danh sách đơn hàng
-- `GET /orders/:id` - Chi tiết đơn hàng
-- `POST /orders` - Tạo đơn hàng mới
-- `PUT /orders/:id/status` - Cập nhật trạng thái
-
-## 🔧 Cấu Hình
-
-### Environment Variables
-```env
-# Server
-NODE_ENV=development
-PORT=5000
-
-# Database
-MONGODB_URI=mongodb://localhost:27017/bikerhub
-REDIS_URL=redis://localhost:6379
-
-# JWT
-JWT_SECRET=your-super-secret-jwt-key
-JWT_EXPIRE=7d
-
-# Email
-EMAIL_HOST=smtp.gmail.com
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASS=your-app-password
-
-# Payment
-STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
-
-# Cloud Storage
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
-
-### Database Models
-
-#### User Schema
-- Personal information (username, email, password)
-- Role-based permissions (user, moderator, admin)
-- Addresses và preferences
-- Security features (login attempts, account lock)
-
-#### Product Schema
-- Product details (name, description, price)
-- Images và specifications
-- Stock management
-- SEO optimization
-
-#### Order Schema
-- Order items và customer details
-- Shipping & billing addresses
-- Payment information
-- Status tracking
-
-## 🎨 Frontend Features
-
-### Responsive Design
-- Mobile-first approach
-- CSS Grid và Flexbox layouts
-- Media queries cho breakpoints
-- Touch-friendly interactions
-
-### Modern UI Components
-- Glassmorphism effects
-- Smooth animations và transitions
-- Loading states và skeletons
-- Toast notifications
-- Modal dialogs
-
-### JavaScript Features
-- ES6+ classes và modules
-- LocalStorage management
-- Event delegation
-- Intersection Observer API
-- Debounced search
-
-## 🔒 Security Features
-
-### Authentication & Authorization
-- JWT token-based authentication
-- Role-based access control
-- Password hashing với bcryptjs
-- Account lockout protection
-
-### API Security
-- Rate limiting
-- CORS configuration
-- Input validation & sanitization
-- Helmet security headers
-- Request size limits
-
-### Data Protection
-- MongoDB injection prevention
-- XSS protection
-- CSRF protection
-- Secure file uploads
-
-## 📊 Performance & Optimization
-
-### Frontend
-- CSS và JavaScript minification
-- Image optimization
-- Lazy loading
-- Service worker caching
-
-### Backend
-- Database indexing
-- Query optimization
-- Redis caching
-- Compression middleware
-- Connection pooling
+### **Core Endpoints**
+- **Authentication**: `/api/auth/*`
+- **Users**: `/api/users/*`
+- **Products**: `/api/products/*`
+- **Orders**: `/api/orders/*`
+- **Payments**: `/api/payments/*`
+- **Uploads**: `/api/uploads/*`
+- **Analytics**: `/api/analytics/*`
 
 ## 🧪 Testing
 
-### Backend Testing
+### **Backend Testing**
 ```bash
 cd backend
 npm test                    # Run all tests
-npm run test:coverage      # Run with coverage
-npm test -- --grep "User"  # Run specific tests
+npm run test:watch         # Watch mode
+npm run test:coverage      # Coverage report
 ```
 
-### Frontend Testing
-- Manual testing với browser dev tools
-- Cross-browser compatibility
-- Mobile responsiveness testing
-- Accessibility testing
+### **Frontend Testing**
+```bash
+cd frontend
+# Open in browser and test manually
+# Or use testing frameworks like Jest, Cypress
+```
+
+## 📊 Monitoring & Health
+
+### **Health Checks**
+- **Application**: `GET /health`
+- **Database**: `GET /health/db`
+- **Redis**: `GET /health/redis`
+
+### **Performance Metrics**
+- Request/response times
+- Database query performance
+- Memory usage and optimization
+- Error rates and tracking
 
 ## 🚀 Deployment
 
-### Production Environment
-```bash
-# Set environment variables
-NODE_ENV=production
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/bikerhub
+### **Production Checklist**
+- [ ] Environment variables configured
+- [ ] SSL certificates installed
+- [ ] Database backups enabled
+- [ ] Monitoring and alerting
+- [ ] Log rotation configured
+- [ ] Health checks enabled
+- [ ] Rate limiting configured
 
-# Install dependencies
-npm ci --only=production
+### **Deployment Options**
 
-# Start server
-npm start
-```
+1. **Docker Compose** (Recommended)
+   ```bash
+   docker-compose -f docker-compose.yml up -d
+   ```
 
-### Docker Production
-```bash
-# Build production image
-docker build -t bikerhub-backend:prod ./backend
+2. **Kubernetes**
+   ```bash
+   kubectl apply -f k8s/
+   ```
 
-# Run with production config
-docker run -d -p 5000:5000 --env-file .env.prod bikerhub-backend:prod
-```
+3. **Cloud Platforms**
+   - AWS ECS/Fargate
+   - Google Cloud Run
+   - Azure Container Instances
+   - DigitalOcean App Platform
 
-### Cloud Deployment
-- **Heroku**: Easy deployment với Git
-- **AWS**: EC2, ECS, hoặc Lambda
-- **Google Cloud**: App Engine hoặc Cloud Run
-- **Azure**: App Service hoặc Container Instances
+## 🔒 Security Features
 
-## 📈 Monitoring & Logging
+### **Authentication & Authorization**
+- JWT-based authentication
+- Role-based access control
+- Session management
+- Password policies
 
-### Application Logs
-- Winston logging framework
-- File-based logging (production)
-- Console logging (development)
-- Error tracking và monitoring
+### **Data Protection**
+- Input validation and sanitization
+- XSS and CSRF protection
+- SQL injection prevention
+- Rate limiting and DDoS protection
 
-### Health Checks
-- API health endpoint
-- Database connection monitoring
-- Service availability checks
-- Performance metrics
+### **Infrastructure Security**
+- Container security best practices
+- Network isolation
+- Secret management
+- Regular security updates
 
 ## 🤝 Contributing
 
-1. **Fork repository**
-2. **Create feature branch** (`git checkout -b feature/AmazingFeature`)
-3. **Commit changes** (`git commit -m 'Add some AmazingFeature'`)
-4. **Push to branch** (`git push origin feature/AmazingFeature`)
-5. **Open Pull Request**
+We welcome contributions! Please see our contributing guidelines:
 
-### Development Guidelines
-- Follow ESLint configuration
-- Write meaningful commit messages
-- Add tests cho new features
-- Update documentation
-- Follow coding standards
+1. **Fork the repository**
+2. **Create a feature branch**
+3. **Make your changes**
+4. **Add tests for new functionality**
+5. **Ensure all tests pass**
+6. **Submit a pull request**
 
-## 📞 Support & Community
-
-### Getting Help
-1. Check documentation và README files
-2. Search existing issues
-3. Create new issue với detailed description
-4. Join community discussions
-
-### Community Channels
-- GitHub Issues
-- Discussion forums
-- Social media groups
-- Developer meetups
+### **Development Guidelines**
+- Follow ES6+ best practices
+- Write comprehensive tests
+- Document new features
+- Use ESLint and Prettier
+- Follow conventional commits
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## 🆘 Support
 
-- **Unsplash** cho hình ảnh sản phẩm
-- **MongoDB** cho database solution
-- **Express.js** cho web framework
-- **Node.js** community cho support
+- **Documentation**: [API Docs](http://localhost:5000/api-docs)
+- **Issues**: [GitHub Issues](https://github.com/Tson28/biker--shop/issues)
+- **Email**: support@bikerhub.com
+- **Discord**: [Join our community](https://discord.gg/bikerhub)
 
-## 🚀 Roadmap
+## 🔄 Changelog
 
-### Phase 1 (Current)
-- ✅ Basic e-commerce functionality
-- ✅ User authentication
-- ✅ Product management
-- ✅ Order processing
+### **v2.0.0** (Current)
+- **Modern Architecture**: ES6+ modules and async/await
+- **Enhanced Frontend**: Advanced UI components and animations
+- **Scalable Backend**: Performance monitoring and optimization
+- **Production Ready**: Docker, health checks, and monitoring
+- **Comprehensive Testing**: Jest framework and coverage
+- **API Documentation**: Interactive Swagger/OpenAPI docs
 
-### Phase 2 (Next)
-- 🔄 Advanced search & filtering
-- 🔄 Payment gateway integration
-- 🔄 Email notifications
-- 🔄 Admin dashboard
+### **v1.0.0**
+- Basic e-commerce functionality
+- User authentication and management
+- Product catalog and orders
+- Payment integration
+- File uploads
 
-### Phase 3 (Future)
-- 📋 Mobile app development
-- 📋 AI-powered recommendations
-- 📋 Multi-language support
-- 📋 Advanced analytics
+## 🌟 Acknowledgments
+
+- **Bike Community** - For inspiration and feedback
+- **Open Source Contributors** - For amazing tools and libraries
+- **Modern Web Standards** - For cutting-edge technologies
 
 ---
 
-**BikerHUB** - Xây dựng với ❤️ cho cộng đồng xe đạp!
+**Built with ❤️ by the BikerHUB Team**
 
-*Nếu bạn thấy dự án này hữu ích, hãy ⭐ star repository và �� fork để ủng hộ!*
+[![GitHub stars](https://img.shields.io/github/stars/Tson28/biker--shop?style=social)](https://github.com/Tson28/biker--shop/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Tson28/biker--shop?style=social)](https://github.com/Tson28/biker--shop/network)
+[![GitHub issues](https://img.shields.io/github/issues/Tson28/biker--shop)](https://github.com/Tson28/biker--shop/issues)
+[![GitHub license](https://img.shields.io/github/license/Tson28/biker--shop)](https://github.com/Tson28/biker--shop/blob/main/LICENSE)

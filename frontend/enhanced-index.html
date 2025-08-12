@@ -3,10 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BikerHUB - Your Ultimate Bike Destination. Buy, sell, and discover the perfect ride for every adventure.">
+    <meta name="keywords" content="bikes, bicycles, mountain bikes, road bikes, electric bikes, cycling, bike shop">
+    <meta name="author" content="BikerHUB">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="BikerHUB - Your Ultimate Bike Destination">
+    <meta property="og:description" content="Buy, sell, and discover the perfect ride for every adventure. Experience the freedom of the open road with our premium collection.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?w=1200&h=630&fit=crop">
+    <meta property="og:url" content="https://bikerhub.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BikerHUB - Your Ultimate Bike Destination">
+    <meta name="twitter:description" content="Buy, sell, and discover the perfect ride for every adventure.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
     <title>BikerHUB - Your Ultimate Bike Destination</title>
-    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BikerHUB",
+        "url": "https://bikerhub.com",
+        "logo": "https://bikerhub.com/logo.png",
+        "description": "Your Ultimate Bike Destination",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Bike Street",
+            "addressLocality": "City",
+            "addressCountry": "Country"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-555-123-4567",
+            "contactType": "customer service",
+            "email": "info@bikerhub.com"
+        }
+    }
+    </script>
+    
     <style>
         /* Enhanced page-specific styles */
         :root {
@@ -541,50 +596,119 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #5a6fd8, #6a4190);
         }
+
+        /* Enhanced Search Bar */
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-lg);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: var(--font-size-lg);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: var(--shadow-md);
+        }
     </style>
 </head>
 <body>
+    <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <div class="navbar" id="navbar">
-        <a href="index.html" class="logo">BikerHUB</a>
-        <div class="nav-links">
-            <a href="index.html"><i class="fas fa-home"></i> Home</a>
-            <a href="bikes.html"><i class="fas fa-bicycle"></i> Products</a>
-            <a href="sell.html"><i class="fas fa-tags"></i> Sell Bike</a>
-            <a href="orders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
-        </div>
-        <div class="user-section">
-            <div class="cart-icon" onclick="bikerhub.openCart()">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count" id="cartCount">0</span>
+    <!-- Enhanced Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="BikerHUB Home">
+                <i class="fas fa-bicycle"></i> BikerHUB
+            </a>
+            
+            <div class="nav-links" role="menubar">
+                <a href="index.html" role="menuitem" aria-current="page">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="bikes.html" role="menuitem">
+                    <i class="fas fa-bicycle"></i> Products
+                </a>
+                <a href="sell.html" role="menuitem">
+                    <i class="fas fa-tags"></i> Sell Bike
+                </a>
+                <a href="orders.html" role="menuitem">
+                    <i class="fas fa-shopping-bag"></i> My Orders
+                </a>
             </div>
-            <span id="userInfo">Guest</span>
-            <button onclick="bikerhub.logout()" id="logoutBtn" class="btn btn-sm" style="display: none;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+            
+            <div class="user-section">
+                <div class="cart-icon" onclick="bikerhub.openCart()" role="button" tabindex="0" aria-label="Shopping cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+                </div>
+                
+                <span id="userInfo" aria-live="polite">Guest</span>
+                
+                <button onclick="bikerhub.logout()" id="logoutBtn" class="btn btn-sm" style="display: none;" aria-label="Logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="admin-panel" id="adminPanel">
+    <!-- Enhanced Admin Panel -->
+    <div class="admin-panel" id="adminPanel" role="complementary" aria-label="Admin panel" style="display: none;">
         <h3><i class="fas fa-cogs"></i> Admin Panel</h3>
-        <button onclick="bikerhub.showAllUsers()">
+        <button onclick="bikerhub.showAllUsers()" aria-label="View all users">
             <i class="fas fa-users"></i> View All Users
         </button>
-        <button onclick="bikerhub.showAllOrders()">
+        <button onclick="bikerhub.showAllOrders()" aria-label="View all orders">
             <i class="fas fa-clipboard-list"></i> View All Orders
         </button>
-        <button onclick="bikerhub.clearAllData()">
+        <button onclick="bikerhub.clearAllData()" aria-label="Clear all data">
             <i class="fas fa-trash"></i> Clear All Data
         </button>
-        <button onclick="bikerhub.toggleAdminPanel()">
+        <button onclick="bikerhub.toggleAdminPanel()" aria-label="Close admin panel">
             <i class="fas fa-times"></i> Close Panel
         </button>
     </div>
 
-    <main id="main-content">
-        <section class="hero-section">
-            <div class="floating-shapes">
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Enhanced Hero Section -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="floating-shapes" aria-hidden="true">
                 <div class="shape"></div>
                 <div class="shape"></div>
                 <div class="shape"></div>
@@ -593,69 +717,82 @@
             </div>
             
             <div class="hero-content">
-                <h1><i class="fas fa-bicycle"></i> Welcome to BikerHUB</h1>
+                <h1 id="hero-title">
+                    <i class="fas fa-bicycle" aria-hidden="true"></i> 
+                    Welcome to BikerHUB
+                </h1>
                 <p>Your ultimate destination for amazing bikes! Buy, sell, and discover the perfect ride for every adventure. Experience the freedom of the open road with our premium collection.</p>
+                
+                <!-- Enhanced Search Bar -->
+                <div class="search-container">
+                    <input type="search" class="search-input" placeholder="Search for bikes, brands, or features..." aria-label="Search for bikes">
+                    <button class="search-btn" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
                 <div class="hero-buttons">
-                    <a href="bikes.html" class="btn btn-primary">
-                        <i class="fas fa-rocket"></i> Start Shopping
+                    <a href="bikes.html" class="btn btn-primary" role="button">
+                        <i class="fas fa-rocket" aria-hidden="true"></i> Start Shopping
                     </a>
-                    <a href="sell.html" class="btn btn-secondary">
-                        <i class="fas fa-tags"></i> Sell Your Bike
+                    <a href="sell.html" class="btn btn-secondary" role="button">
+                        <i class="fas fa-tags" aria-hidden="true"></i> Sell Your Bike
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="features-section">
+        <!-- Enhanced Features Section -->
+        <section class="features-section" aria-labelledby="features-title">
             <div class="container">
                 <div class="section-header">
-                    <h2>Why Choose BikerHUB?</h2>
+                    <h2 id="features-title">Why Choose BikerHUB?</h2>
                     <p>Discover the features that make us the leading platform for bike enthusiasts worldwide</p>
                 </div>
                 
                 <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
+                    <div class="feature-card" role="article">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
                         <h3>Easy Shopping</h3>
                         <p>Browse through thousands of bikes with our intuitive search and filter system. Find your perfect ride in minutes with advanced filtering options.</p>
                     </div>
                     
-                    <div class="feature-card">
-                        <div class="feature-icon">
+                    <div class="feature-card" role="article">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-dollar-sign"></i>
                         </div>
                         <h3>Best Prices</h3>
                         <p>Get competitive prices on new and used bikes. Our platform ensures fair pricing for both buyers and sellers with transparent pricing.</p>
                     </div>
                     
-                    <div class="feature-card">
-                        <div class="feature-icon">
+                    <div class="feature-card" role="article">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-shipping-fast"></i>
                         </div>
                         <h3>Fast Delivery</h3>
                         <p>Quick and secure shipping to your doorstep. Track your order in real-time from purchase to delivery with our advanced tracking system.</p>
                     </div>
                     
-                    <div class="feature-card">
-                        <div class="feature-icon">
+                    <div class="feature-card" role="article">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>Secure Payments</h3>
                         <p>Multiple payment options with bank-level security. Your financial information is always protected with industry-standard encryption.</p>
                     </div>
                     
-                    <div class="feature-card">
-                        <div class="feature-icon">
+                    <div class="feature-card" role="article">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
                         <h3>Mobile Friendly</h3>
                         <p>Shop on any device with our responsive design. Your shopping experience is optimized for all screen sizes and devices.</p>
                     </div>
                     
-                    <div class="feature-card">
-                        <div class="feature-icon">
+                    <div class="feature-card" role="article">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-headset"></i>
                         </div>
                         <h3>24/7 Support</h3>
@@ -665,17 +802,18 @@
             </div>
         </section>
 
-        <section class="cta-section">
+        <!-- Enhanced CTA Section -->
+        <section class="cta-section" aria-labelledby="cta-title">
             <div class="container">
                 <div class="cta-content">
-                    <h2>Ready to Start Your Bike Journey?</h2>
+                    <h2 id="cta-title">Ready to Start Your Bike Journey?</h2>
                     <p>Join thousands of satisfied customers who found their perfect ride on BikerHUB. Start exploring our collection today!</p>
                     <div class="hero-buttons">
-                        <a href="bikes.html" class="btn btn-primary">
-                            <i class="fas fa-rocket"></i> Start Shopping
+                        <a href="bikes.html" class="btn btn-primary" role="button">
+                            <i class="fas fa-rocket" aria-hidden="true"></i> Start Shopping
                         </a>
-                        <a href="signup.html" class="btn btn-secondary">
-                            <i class="fas fa-user-plus"></i> Create Account
+                        <a href="signup.html" class="btn btn-secondary" role="button">
+                            <i class="fas fa-user-plus" aria-hidden="true"></i> Create Account
                         </a>
                     </div>
                 </div>
@@ -683,7 +821,8 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <!-- Enhanced Footer -->
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -693,35 +832,36 @@
                 
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <p><a href="bikes.html"><i class="fas fa-bicycle"></i> Browse Bikes</a></p>
-                    <p><a href="sell.html"><i class="fas fa-tags"></i> Sell Your Bike</a></p>
-                    <p><a href="orders.html"><i class="fas fa-shopping-bag"></i> Track Orders</a></p>
-                    <p><a href="login.html"><i class="fas fa-user"></i> My Account</a></p>
+                    <p><a href="bikes.html"><i class="fas fa-bicycle" aria-hidden="true"></i> Browse Bikes</a></p>
+                    <p><a href="sell.html"><i class="fas fa-tags" aria-hidden="true"></i> Sell Your Bike</a></p>
+                    <p><a href="orders.html"><i class="fas fa-shopping-bag" aria-hidden="true"></i> Track Orders</a></p>
+                    <p><a href="login.html"><i class="fas fa-user" aria-hidden="true"></i> My Account</a></p>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Contact Info</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Bike Street, City, Country</p>
-                    <p><i class="fas fa-envelope"></i> info@bikerhub.com</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> 123 Bike Street, City, Country</p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> info@bikerhub.com</p>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> +1 (555) 123-4567</p>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Follow Us</h3>
-                    <p><i class="fab fa-facebook"></i> Facebook</p>
-                    <p><i class="fab fa-instagram"></i> Instagram</p>
-                    <p><i class="fab fa-twitter"></i> Twitter</p>
-                    <p><i class="fab fa-linkedin"></i> LinkedIn</p>
+                    <p><a href="#" aria-label="Follow us on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i> Facebook</a></p>
+                    <p><a href="#" aria-label="Follow us on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></p>
+                    <p><a href="#" aria-label="Follow us on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter</a></p>
+                    <p><a href="#" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 BikerHUB. All rights reserved. | Privacy Policy | Terms of Service</p>
+                <p>&copy; 2024 BikerHUB. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
             </div>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <!-- Scripts -->
+    <script src="script.js"></script>
     <script>
         // Enhanced page-specific functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -764,6 +904,28 @@
 
             document.querySelectorAll('.feature-card').forEach(card => {
                 observer.observe(card);
+            });
+
+            // Enhanced search functionality
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    if (this.value.length > 2) {
+                        // Implement search functionality
+                        console.log('Searching for:', this.value);
+                    }
+                });
+            }
+
+            // Enhanced accessibility
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    // Close any open modals or panels
+                    const adminPanel = document.getElementById('adminPanel');
+                    if (adminPanel && adminPanel.style.display !== 'none') {
+                        adminPanel.style.display = 'none';
+                    }
+                }
             });
         });
     </script>

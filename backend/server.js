@@ -1,32 +1,62 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const helmet = require('helmet');
-const compression = require('compression');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-const path = require('path');
-const fs = require('fs');
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import rateLimit from 'express-rate-limit';
+import slowDown from 'express-slow-down';
+import mongoSanitize from 'express-mongo-sanitize';
+import xssClean from 'xss-clean';
+import hpp from 'hpp';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import chalk from 'chalk';
+import figlet from 'figlet';
+import ora from 'ora';
+import boxen from 'boxen';
 
-const config = require('./config/config');
-const connectDB = require('./config/database');
-const logger = require('./utils/logger');
+import config from './config/config.js';
+import connectDB from './config/database.js';
+import logger from './utils/logger.js';
+import { errorHandler, notFound } from './middleware/errorHandler.js';
+import { setupSwagger } from './utils/swagger.js';
+import { setupCronJobs } from './utils/cron.js';
 
 // Import routes
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const productRoutes = require('./routes/products');
-const orderRoutes = require('./routes/orders');
-const paymentRoutes = require('./routes/payments');
-const uploadRoutes = require('./routes/uploads');
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+import productRoutes from './routes/products.js';
+import orderRoutes from './routes/orders.js';
+import paymentRoutes from './routes/payments.js';
+import uploadRoutes from './routes/uploads.js';
+import analyticsRoutes from './routes/analytics.js';
 
-// Initialize express app
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
+const PORT = config.server.port || 5000;
 
-// Connect to MongoDB
-connectDB();
+// Display startup banner
+console.log('\n');
+figlet('BikerHUB', { font: 'Big Money-sw' }, (err, data) => {
+  if (err) {
+    console.log('BikerHUB Backend Starting...');
+  } else {
+    console.log(chalk.cyan(data));
+  }
+});
 
-// Security middleware
+console.log(boxen(chalk.green('🚀 Modern Backend API v2.0'), {
+  padding: 1,
+  margin: 1,
+  borderStyle: 'round',
+  borderColor: 'cyan'
+}));
+
+// Enhanced Security Middleware
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -35,69 +65,89 @@ app.use(helmet({
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:"],
       scriptSrc: ["'self'"],
-      connectSrc: ["'self'", "https://api.stripe.com"]
+      connectSrc: ["'self'"]
     }
-  }
+  },
+  crossOriginEmbedderPolicy: false
 }));
 
-// Rate limiting
+// Rate Limiting & Security
 const limiter = rateLimit({
-  windowMs: config.RATE_LIMIT_WINDOW_MS,
-  max: config.RATE_LIMIT_MAX_REQUESTS,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
   message: {
-    error: 'Too many requests from this IP, please try again later.'
+    error: 'Too many requests from this IP, please try again later.',
+    retryAfter: '15 minutes'
   },
   standardHeaders: true,
   legacyHeaders: false
 });
 
+const speedLimiter = slowDown({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  delayAfter: 50, // allow 50 requests per 15 minutes, then...
+  delayMs: 500 // begin adding 500ms of delay per request above 50
+});
+
 app.use('/api/', limiter);
+app.use('/api/', speedLimiter);
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// Cookie and session middleware
+app.use(cookieParser());
+app.use(session({
+  secret: config.server.sessionSecret || 'bikerhub-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: config.server.nodeEnv === 'production',
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+}));
+
+// Security middleware
+app.use(mongoSanitize());
+app.use(xssClean());
+app.use(hpp());
+
+// CORS configuration
+const corsOptions = {
+  origin: config.cors.allowedOrigins || ['http://localhost:3000', 'http://localhost:5000'],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept']
+};
+
+app.use(cors(corsOptions));
+
 // Compression middleware
 app.use(compression());
 
-// CORS configuration
-app.use(cors({
-  origin: config.CORS_ORIGIN,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-}));
-
 // Logging middleware
-if (config.NODE_ENV === 'development') {
+if (config.server.nodeEnv === 'development') {
   app.use(morgan('dev'));
 } else {
-  // Create logs directory if it doesn't exist
-  const logsDir = path.dirname(config.LOG_FILE);
-  if (!fs.existsSync(logsDir)) {
-    fs.mkdirSync(logsDir, { recursive: true });
-  }
-  
-  const accessLogStream = fs.createWriteStream(
-    path.join(logsDir, 'access.log'),
-    { flags: 'a' }
-  );
-  app.use(morgan('combined', { stream: accessLogStream }));
+  app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
 }
-
-// Static files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
-    status: 'success',
-    message: 'BikerHUB API is running',
+    status: 'OK',
     timestamp: new Date().toISOString(),
-    environment: config.NODE_ENV,
-    uptime: process.uptime()
+    uptime: process.uptime(),
+    environment: config.server.nodeEnv,
+    version: '2.0.0'
   });
 });
+
+// API Documentation
+setupSwagger(app);
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -106,45 +156,76 @@ app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/uploads', uploadRoutes);
+app.use('/api/analytics', analyticsRoutes);
+
+// Serve static files in production
+if (config.server.nodeEnv === 'production') {
+  app.use(express.static(join(__dirname, '../frontend')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, '../frontend/index.html'));
+  });
+}
 
 // Error handling middleware
-app.use((req, res, next) => {
-  const error = new Error(`Route ${req.originalUrl} not found`);
-  error.status = 404;
-  next(error);
-});
-
-app.use((error, req, res, next) => {
-  const statusCode = error.status || 500;
-  const message = error.message || 'Internal Server Error';
-  
-  logger.error(`${req.method} ${req.originalUrl} - ${statusCode} - ${message}`);
-  
-  res.status(statusCode).json({
-    status: 'error',
-    message: config.NODE_ENV === 'production' ? 'Internal Server Error' : message,
-    ...(config.NODE_ENV === 'development' && { stack: error.stack })
-  });
-});
+app.use(notFound);
+app.use(errorHandler);
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM received, shutting down gracefully');
-  process.exit(0);
-});
+const gracefulShutdown = (signal) => {
+  logger.info(`Received ${signal}. Starting graceful shutdown...`);
+  
+  const spinner = ora('Shutting down gracefully...').start();
+  
+  setTimeout(() => {
+    spinner.succeed('Server closed');
+    process.exit(0);
+  }, 1000);
+};
 
-process.on('SIGINT', () => {
-  logger.info('SIGINT received, shutting down gracefully');
-  process.exit(0);
-});
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 // Start server
-const PORT = config.PORT;
-app.listen(PORT, () => {
-  logger.info(`🚀 BikerHUB Backend Server running on port ${PORT}`);
-  logger.info(`🌍 Environment: ${config.NODE_ENV}`);
-  logger.info(`📊 Health check: http://localhost:${PORT}/health`);
-  logger.info(`🔗 API Base URL: ${config.API_URL}`);
-});
+const startServer = async () => {
+  try {
+    const spinner = ora('Connecting to database...').start();
+    
+    // Connect to database
+    await connectDB();
+    spinner.succeed('Database connected successfully');
+    
+    // Setup cron jobs
+    setupCronJobs();
+    
+    // Start server
+    const server = app.listen(PORT, () => {
+      logger.info(`🚀 Server running on port ${PORT} in ${config.server.nodeEnv} mode`);
+      console.log(boxen(chalk.green(`✅ Server is running on http://localhost:${PORT}`), {
+        padding: 1,
+        margin: 1,
+        borderStyle: 'round',
+        borderColor: 'green'
+      }));
+      
+      if (config.server.nodeEnv === 'development') {
+        console.log(chalk.blue(`📚 API Documentation: http://localhost:${PORT}/api-docs`));
+        console.log(chalk.blue(`🔍 Health Check: http://localhost:${PORT}/health`));
+      }
+    });
+    
+    // Handle server errors
+    server.on('error', (error) => {
+      logger.error('Server error:', error);
+      process.exit(1);
+    });
+    
+  } catch (error) {
+    logger.error('Failed to start server:', error);
+    process.exit(1);
+  }
+};
 
-module.exports = app;
+startServer();
+
+export default app;
