@@ -143,3 +143,4 @@ export const setupSwagger = (app) => {
 
   console.log('📚 Swagger documentation available at /api-docs');
 };
+

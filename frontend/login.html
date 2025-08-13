@@ -4,367 +4,265 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - BikerHUB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .floating-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .shape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .shape:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffd700;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-
-        .form-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 20px;
-            width: 400px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            z-index: 2;
-            position: relative;
-        }
-
-        .form-container h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .form-container p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #ffd700;
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .signup-link {
-            margin-top: 20px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .signup-link a {
-            color: #ffd700;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-        .admin-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .admin-info h3 {
-            color: #ffd700;
-            margin-bottom: 15px;
-        }
-
-        .admin-info p {
-            margin-bottom: 8px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .admin-info strong {
-            color: #ffd700;
-        }
-
-        .success-message {
-            background: rgba(39, 174, 96, 0.2);
-            color: #2ecc71;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border: 1px solid rgba(39, 174, 96, 0.3);
-            display: none;
-        }
-
-        .error-message {
-            background: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border: 1px solid rgba(231, 76, 60, 0.3);
-            display: none;
-        }
-
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-
-        .forgot-password a {
-            color: #ffd700;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .form-container {
-                width: 90%;
-                padding: 30px 20px;
-            }
-            
-            .form-container h1 {
-                font-size: 2rem;
-            }
-            
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <i class="fas fa-bicycle"></i> BikerHUB
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="bikes.html" class="nav-link">Products</a></li>
+                <li><a href="login.html" class="nav-link active">Login</a></li>
+                <li><a href="signup.html" class="nav-link">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-fade-in-up">Welcome Back</h1>
+                    <p class="hero-subtitle animate-fade-in-up">Sign in to your BikerHUB account and continue your cycling journey</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Form Section -->
+        <section class="section">
+            <div class="container">
+                <div class="card" style="max-width: 500px; margin: 0 auto;">
+                    <div class="card-header">
+                        <h2 class="text-center">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </h2>
+                        <p class="text-center text-secondary">
+                            Access your account and explore our cycling community
+                        </p>
+                    </div>
+                    
+                    <div class="card-body">
+                        <!-- Step 1: Login Form -->
+                        <div id="step1" class="login-step">
+                            <form id="loginForm" class="login-form">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">
+                                        <i class="fas fa-envelope"></i> Email Address
+                                    </label>
+                                    <input type="email" id="email" name="email" class="form-input" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password" class="form-label">
+                                        <i class="fas fa-lock"></i> Password
+                                    </label>
+                                    <div class="password-input-container">
+                                        <input type="password" id="password" name="password" class="form-input" required>
+                                        <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="remember" name="remember">
+                                        <span class="checkmark"></span>
+                                        Remember me for 30 days
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="fas fa-sign-in-alt"></i> Sign In
+                                </button>
+
+                                <div class="login-actions">
+                                    <a href="#" onclick="showForgotPassword()" class="forgot-password">
+                                        <i class="fas fa-question-circle"></i> Forgot Password?
+                                    </a>
+                                    <a href="signup.html" class="create-account">
+                                        <i class="fas fa-user-plus"></i> Create Account
+                                    </a>
+                                </div>
+                            </form>
+
+                            <!-- Social Login -->
+                            <div class="social-login">
+                                <div class="divider">
+                                    <span>or continue with</span>
+                                </div>
+                                
+                                <div class="social-buttons">
+                                    <button class="btn btn-ghost social-btn google-btn">
+                                        <i class="fab fa-google"></i> Google
+                                    </button>
+                                    <button class="btn btn-ghost social-btn facebook-btn">
+                                        <i class="fab fa-facebook-f"></i> Facebook
+                                    </button>
+                                    <button class="btn btn-ghost social-btn apple-btn">
+                                        <i class="fab fa-apple"></i> Apple
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: OTP Verification -->
+                        <div id="step2" class="login-step" style="display: none;">
+                            <div class="otp-verification">
+                                <div class="verification-header">
+                                    <i class="fas fa-shield-alt verification-icon"></i>
+                                    <h3>Two-Factor Authentication</h3>
+                                    <p>We've sent a 6-digit verification code to <strong id="verificationEmail"></strong></p>
+                                </div>
+
+                                <form id="otpForm" class="otp-form">
+                                    <div class="otp-inputs">
+                                        <input type="text" class="otp-input" maxlength="1" data-index="0">
+                                        <input type="text" class="otp-input" maxlength="1" data-index="1">
+                                        <input type="text" class="otp-input" maxlength="1" data-index="2">
+                                        <input type="text" class="otp-input" maxlength="1" data-index="3">
+                                        <input type="text" class="otp-input" maxlength="1" data-index="4">
+                                        <input type="text" class="otp-input" maxlength="1" data-index="5">
+                                    </div>
+
+                                    <div class="otp-actions">
+                                        <button type="button" class="btn btn-outline" onclick="resendOTP()">
+                                            <i class="fas fa-redo"></i> Resend Code
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-check"></i> Verify & Login
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <div class="verification-timer">
+                                    <p>Resend code in <span id="countdown">60</span> seconds</p>
+                                </div>
+
+                                <div class="back-to-login">
+                                    <button class="btn btn-ghost" onclick="showStep(1)">
+                                        <i class="fas fa-arrow-left"></i> Back to Login
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Success -->
+                        <div id="step3" class="login-step" style="display: none;">
+                            <div class="success-message">
+                                <div class="success-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3>Welcome Back!</h3>
+                                <p>You have successfully logged in to your BikerHUB account.</p>
+                                <div class="success-actions">
+                                    <a href="index.html" class="btn btn-primary">
+                                        <i class="fas fa-home"></i> Go to Homepage
+                                    </a>
+                                    <a href="bikes.html" class="btn btn-outline">
+                                        <i class="fas fa-bicycle"></i> Browse Products
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-bicycle"></i> BikerHUB</h3>
+                    <p>Your ultimate destination for all things cycling. Join our community of passionate cyclists.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="bikes.html">Products</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="help.html">Help Center</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="shipping.html">Shipping Info</a>
+                    <a href="returns.html">Returns</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BikerHUB. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reset Password</h3>
+                <button class="modal-close" onclick="closeModal('forgotPasswordModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                
+                <form id="resetPasswordForm" class="reset-form">
+                    <div class="form-group">
+                        <label for="resetEmail" class="form-label">Email Address</label>
+                        <input type="email" id="resetEmail" name="resetEmail" class="form-input" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-paper-plane"></i> Send Reset Link
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div class="navbar">
-        <a href="index.html" class="logo">BikerHUB</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="bikes.html">Products</a>
-            <a href="sell.html">Sell Bike</a>
-            <a href="orders.html">My Orders</a>
-        </div>
-    </div>
-
-    <div class="form-container">
-        <h1>🔐 Login</h1>
-        <p>Welcome back! Sign in to your BikerHUB account</p>
-        
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Username or Email</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            
-            <div class="forgot-password">
-                <a href="#" onclick="forgotPassword()">Forgot Password?</a>
-            </div>
-            
-            <button type="submit" class="btn-submit" id="submitBtn">
-                🚀 Sign In
-            </button>
-        </form>
-        
-        <div class="success-message" id="successMessage">
-            <h3>🎉 Welcome Back!</h3>
-            <p>Login successful! Redirecting to homepage...</p>
-        </div>
-        
-        <div class="error-message" id="errorMessage">
-            <h3>❌ Login Failed</h3>
-            <p id="errorText">Invalid credentials. Please try again.</p>
-        </div>
-        
-        <div class="signup-link">
-            Don't have an account? <a href="signup.html">Sign up here</a>
-        </div>
-        
-        <div class="admin-info">
-            <h3>👑 Admin Account</h3>
-            <p><strong>Username:</strong> admin</p>
-            <p><strong>Password:</strong> admin123</p>
-            <p style="font-size: 0.8rem; opacity: 0.8;">Use these credentials to access admin features.</p>
-        </div>
-    </div>
-
+    <script src="script.js"></script>
     <script>
-        // Initialize page
-        window.onload = function() {
-            checkIfAlreadyLoggedIn();
-        };
+        // Login functionality
+        let currentStep = 1;
+        let countdownInterval;
+        let userData = {};
 
-        // Check if user is already logged in
-        function checkIfAlreadyLoggedIn() {
-            const loggedInUser = localStorage.getItem('loggedInUser');
-            if (loggedInUser) {
-                const userRole = localStorage.getItem('userRole');
-                if (userRole === 'admin') {
-                    alert('You are already logged in as Admin!');
-                } else {
-                    alert('You are already logged in as ' + loggedInUser);
-                }
-                window.location.href = 'index.html';
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
             }
         }
 
@@ -372,83 +270,517 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
+            // Collect form data
+            userData = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                remember: document.getElementById('remember').checked
+            };
             
-            // Hide previous messages
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
+            // Simulate login verification
+            showNotification('Verifying your credentials...', 'info');
             
-            // Disable submit button
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Signing In...';
+            // Simulate API call delay
+            setTimeout(() => {
+                // For demo purposes, always show OTP step
+                // In real app, this would check credentials first
+                showNotification('Please verify your identity with OTP', 'info');
+                showStep(2);
+                startCountdown();
+                generateOTP();
+            }, 1500);
+        });
+
+        // Handle OTP form submission
+        document.getElementById('otpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const enteredOTP = Array.from(otpInputs).map(input => input.value).join('');
             
-            if (!username || !password) {
-                showError('Please fill in all fields.');
-                resetSubmitButton();
-                return;
-            }
-            
-            // Attempt login
-            try {
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const user = users.find(user => 
-                    (user.username === username || user.email === username) && 
-                    user.password === password
-                );
+            if (enteredOTP === '123456') { // Demo OTP
+                showNotification('Login successful!', 'success');
+                showStep(3);
                 
-                if (user) {
-                    // Store login info
-                    localStorage.setItem('loggedInUser', user.username);
-                    localStorage.setItem('userRole', user.role || 'user');
-                    
-                    // Show success message
-                    successMessage.style.display = 'block';
-                    
-                    // Redirect to homepage after 2 seconds
-                    setTimeout(() => {
-                        if (user.role === 'admin') {
-                            alert('Welcome Admin! You have administrative privileges.');
-                        } else {
-                            alert('Login successful! Welcome ' + user.username);
-                        }
-                        window.location.href = 'index.html';
-                    }, 2000);
-                    
-                } else {
-                    showError('Incorrect username/email or password!');
-                    resetSubmitButton();
-                }
+                // Store login state
+                localStorage.setItem('bikerhub_logged_in', 'true');
+                localStorage.setItem('bikerhub_user_email', userData.email);
                 
-            } catch (error) {
-                showError('Login failed. Please try again.');
-                resetSubmitButton();
+                // Redirect after delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                showNotification('Invalid OTP. Please try again.', 'error');
+                clearOTPInputs();
             }
         });
 
-        // Show error message
-        function showError(message) {
-            const errorMessage = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
-            errorText.textContent = message;
-            errorMessage.style.display = 'block';
+        // Handle reset password form
+        document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('resetEmail').value;
+            showNotification('Password reset link sent to your email!', 'success');
+            closeModal('forgotPasswordModal');
+            
+            // Clear form
+            document.getElementById('resetPasswordForm').reset();
+        });
+
+        // Show specific step
+        function showStep(step) {
+            document.querySelectorAll('.login-step').forEach(s => s.style.display = 'none');
+            document.getElementById(`step${step}`).style.display = 'block';
+            
+            if (step === 2) {
+                document.getElementById('verificationEmail').textContent = userData.email;
+            }
         }
 
-        // Reset submit button
-        function resetSubmitButton() {
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = false;
-            submitBtn.textContent = '🚀 Sign In';
+        // Start countdown timer
+        function startCountdown() {
+            let timeLeft = 60;
+            const countdownElement = document.getElementById('countdown');
+            
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = '0';
+                }
+            }, 1000);
         }
 
-        // Forgot password function (placeholder)
-        function forgotPassword() {
-            alert('Password reset functionality will be implemented soon. For now, please contact support.');
+        // Resend OTP
+        function resendOTP() {
+            clearInterval(countdownInterval);
+            startCountdown();
+            clearOTPInputs();
+            showNotification('New verification code sent!', 'success');
         }
+
+        // Clear OTP inputs
+        function clearOTPInputs() {
+            document.querySelectorAll('.otp-input').forEach(input => input.value = '');
+            document.querySelector('.otp-input').focus();
+        }
+
+        // Generate demo OTP (in real app, this would be server-generated)
+        function generateOTP() {
+            console.log('Demo OTP: 123456');
+        }
+
+        // Show forgot password modal
+        function showForgotPassword() {
+            document.getElementById('forgotPasswordModal').classList.add('show');
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('show');
+            }
+        });
+
+        // OTP input handling
+        document.querySelectorAll('.otp-input').forEach(input => {
+            input.addEventListener('input', function() {
+                const maxLength = this.maxLength;
+                const currentLength = this.value.length;
+                
+                if (currentLength >= maxLength) {
+                    const nextIndex = parseInt(this.dataset.index) + 1;
+                    const nextInput = document.querySelector(`[data-index="${nextIndex}"]`);
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                }
+            });
+            
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value.length === 0) {
+                    const prevIndex = parseInt(this.dataset.index) - 1;
+                    const prevInput = document.querySelector(`[data-index="${prevIndex}"]`);
+                    if (prevInput) {
+                        prevInput.focus();
+                    }
+                }
+            });
+        });
+
+        // Social login handlers
+        document.querySelector('.google-btn').addEventListener('click', function() {
+            showNotification('Google login coming soon!', 'info');
+        });
+
+        document.querySelector('.facebook-btn').addEventListener('click', function() {
+            showNotification('Facebook login coming soon!', 'info');
+        });
+
+        document.querySelector('.apple-btn').addEventListener('click', function() {
+            showNotification('Apple login coming soon!', 'info');
+        });
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-message">${message}</span>
+                    <button class="notification-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => notification.classList.add('show'), 100);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('bikerhub_logged_in') === 'true') {
+                showNotification('You are already logged in!', 'info');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            }
+        });
     </script>
+
+    <style>
+        /* Additional styles for login page */
+        .login-step {
+            transition: all 0.3s ease;
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray-500);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: var(--radius-md);
+            transition: var(--transition-fast);
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-color);
+            background: var(--gray-100);
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            color: var(--gray-700);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: var(--transition-fast);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + .checkmark {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .login-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .login-actions a {
+            color: var(--primary-color);
+            font-size: var(--font-size-sm);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .login-actions a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .social-login {
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-2xl);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .divider {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gray-300);
+        }
+
+        .divider span {
+            background: var(--white);
+            padding: 0 var(--space-md);
+            color: var(--gray-500);
+            font-size: var(--font-size-sm);
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            border: 1px solid var(--gray-300);
+            transition: var(--transition-fast);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .google-btn:hover {
+            border-color: #ea4335;
+            color: #ea4335;
+        }
+
+        .facebook-btn:hover {
+            border-color: #1877f2;
+            color: #1877f2;
+        }
+
+        .apple-btn:hover {
+            border-color: #000;
+            color: #000;
+        }
+
+        .otp-verification {
+            text-align: center;
+        }
+
+        .verification-header {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .verification-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: var(--space-md);
+        }
+
+        .otp-inputs {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-fast);
+        }
+
+        .otp-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .otp-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .verification-timer {
+            color: var(--gray-600);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .back-to-login {
+            margin-top: var(--space-lg);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: var(--space-2xl) 0;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: var(--space-lg);
+        }
+
+        .success-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-top: var(--space-xl);
+        }
+
+        .reset-form {
+            margin-top: var(--space-lg);
+        }
+
+        .footer {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: var(--space-3xl) 0 var(--space-xl);
+            margin-top: var(--space-3xl);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-section a {
+            color: var(--gray-400);
+            display: block;
+            margin-bottom: var(--space-sm);
+            transition: var(--transition-fast);
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--gray-800);
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 768px) {
+            .otp-inputs {
+                gap: var(--space-xs);
+            }
+            
+            .otp-input {
+                width: 45px;
+                height: 45px;
+                font-size: var(--font-size-lg);
+            }
+            
+            .otp-actions {
+                flex-direction: column;
+            }
+            
+            .success-actions {
+                flex-direction: column;
+            }
+            
+            .social-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .login-actions {
+                flex-direction: column;
+                gap: var(--space-md);
+                text-align: center;
+            }
+        }
+    </style>
 </body>
 </html>
