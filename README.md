@@ -1,4 +1,3 @@
-# 🚀 BikerHUB - Full-Stack E-commerce Platform
 
 Modern, scalable e-commerce platform for bicycle enthusiasts built with cutting-edge technologies.
 
