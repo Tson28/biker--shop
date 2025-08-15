@@ -9,6 +9,8 @@ Modern, scalable e-commerce platform for bicycle enthusiasts built with cutting-
 | 🌐 **Website** | [http://localhost:8000](http://localhost:8000) | ✅ Ready |
 | 🔧 **Backend** | [http://localhost:5000](http://localhost:5000) | ✅ Ready |
 | 📚 **API Docs** | [http://localhost:5000/api-docs](http://localhost:5000/api-docs) | ✅ Ready |
+| 👨‍💼 **Admin Dashboard** | [http://localhost:8000/admin.html](http://localhost:8000/admin.html) | ✅ Ready |
+| 👤 **User Profile** | [http://localhost:8000/profile.html](http://localhost:8000/profile.html) | ✅ Ready |
 
 ## 📋 **Quick Start Commands**
 
@@ -35,6 +37,8 @@ cd frontend && python3 -m http.server 8000
 - **Advanced Search** - Smart filtering, sorting, and search
 - **Wishlist Management** - Save and organize favorite products
 - **Order Tracking** - Real-time order status updates
+- **User Profile System** - Complete user management and preferences
+- **Admin Dashboard** - Comprehensive admin panel for business management
 
 ### 🚀 **Backend (Scalable API)**
 - **Modern ES6+ Architecture** - ES modules and async/await
@@ -52,6 +56,36 @@ cd frontend && python3 -m http.server 8000
 - **Database Clustering** - MongoDB with Redis caching
 - **Monitoring** - Health checks and performance metrics
 - **Auto-scaling** - Ready for Kubernetes deployment
+
+## 🆕 **New Features Added**
+
+### 👨‍💼 **Admin Dashboard**
+- **Product Management** - Add, edit, delete products with full CRUD operations
+- **Order Management** - Track and manage all customer orders
+- **User Management** - Monitor and manage user accounts
+- **Analytics & Reports** - Sales data, top products, revenue tracking
+- **System Settings** - Configure site preferences and maintenance mode
+- **Real-time Statistics** - Live dashboard with key business metrics
+
+### 👤 **User Profile System**
+- **Personal Information** - Edit profile details, bio, and preferences
+- **Order History** - Complete order tracking and history
+- **Wishlist Management** - Save favorites and manage wishlist
+- **Address Management** - Multiple shipping addresses with CRUD operations
+- **Security Settings** - Password change and account security
+- **Notification Preferences** - Customize email and SMS notifications
+
+### 🔐 **Enhanced Authentication**
+- **Role-based Access Control** - Admin and user roles with permissions
+- **Secure Token Management** - JWT with refresh token support
+- **Password Security** - Strong password requirements and validation
+- **Session Management** - Secure session handling and timeout
+
+### 📱 **Mobile-First Design**
+- **Responsive Layout** - Optimized for all device sizes
+- **Touch-Friendly Interface** - Mobile-optimized interactions
+- **Progressive Web App** - App-like experience on mobile devices
+- **Offline Support** - Service worker for offline functionality
 
 ## 🛠️ Tech Stack
 
@@ -101,371 +135,257 @@ cd frontend && python3 -m http.server 8000
    cd frontend && python3 -m http.server 8000
    ```
 
-3. **Open in Browser:**
-   - 🌐 **Website**: [http://localhost:8000](http://localhost:8000)
-   - 🔧 **API**: [http://localhost:5000](http://localhost:5000)
-   - 📚 **Docs**: [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
-
-## 🌐 **How to Access & Run the Application**
-
-### **Method 1: Run Both Services (Recommended)**
-
-1. **Start Backend Server:**
-   ```bash
-   cd backend
-   npm install
-   node server.js
-   ```
-   - Backend will run on: **http://localhost:5000**
-   - API Documentation: **http://localhost:5000/api-docs**
-   - Health Check: **http://localhost:5000/health**
-
-2. **Start Frontend Server:**
-   ```bash
-   cd frontend
-   python3 -m http.server 8000
-   ```
-   - Website will be available at: **http://localhost:8000**
-
-3. **Access Points:**
-   - 🌐 **Main Website**: http://localhost:8000
+3. **Access the Platform:**
+   - 🌐 **Website**: http://localhost:8000
    - 🔧 **Backend API**: http://localhost:5000
    - 📚 **API Docs**: http://localhost:5000/api-docs
-   - ✅ **Health Check**: http://localhost:5000/health
+   - 👨‍💼 **Admin Dashboard**: http://localhost:8000/admin.html
+   - 👤 **User Profile**: http://localhost:8000/profile.html
 
-### **Method 2: Docker (Alternative)**
+## 📁 **Project Structure**
 
-1. **Start all services:**
-   ```bash
-   docker-compose up -d
-   ```
+```
+BikerHUB/
+├── frontend/                 # Frontend application
+│   ├── index.html           # Main homepage
+│   ├── admin.html           # Admin dashboard
+│   ├── profile.html         # User profile page
+│   ├── login.html           # User authentication
+│   ├── signup.html          # User registration
+│   ├── checkout.html        # Shopping cart checkout
+│   ├── orders.html          # Order management
+│   ├── bikes.html           # Product catalog
+│   ├── sell.html            # Product selling
+│   ├── style.css            # Main stylesheet
+│   ├── enhanced-style.css   # Enhanced styles
+│   ├── script.js            # Main JavaScript
+│   ├── enhanced-script.js   # Enhanced functionality
+│   ├── admin-script.js      # Admin dashboard logic
+│   └── profile-script.js    # User profile logic
+├── backend/                  # Backend API server
+│   ├── server.js            # Main server file
+│   ├── config/              # Configuration files
+│   ├── routes/              # API route handlers
+│   ├── controllers/         # Business logic
+│   ├── models/              # Database models
+│   ├── middleware/          # Custom middleware
+│   ├── utils/               # Utility functions
+│   └── uploads/             # File uploads
+├── docker-compose.yml       # Docker services
+└── README.md                # Project documentation
+```
 
-2. **Access the application:**
-   - Frontend: http://localhost
-   - Backend API: http://localhost:5000
-   - API Docs: http://localhost:5000/api-docs
+## 🔐 **Authentication & Security**
 
-### **Method 3: Frontend Only (Static Files)**
+### **User Roles**
+- **Customer** - Browse products, place orders, manage profile
+- **Admin** - Full system access, product management, analytics
 
-1. **Open directly in browser:**
-   ```bash
-   cd frontend
-   # Double-click index.html or open in browser
-   ```
+### **Security Features**
+- JWT token authentication
+- Rate limiting and DDoS protection
+- Input validation and sanitization
+- CORS and security headers
+- Password hashing with bcrypt
+- Session management
 
-2. **Or use any local server:**
-   ```bash
-   cd frontend
-   # Using Python
-   python3 -m http.server 8000
-   
-   # Using Node.js
-   npx serve -s . -p 8000
-   
-   # Using PHP
-   php -S localhost:8000
-   ```
+## 📊 **Admin Dashboard Features**
 
-## 🎯 **Quick Access Guide**
+### **Dashboard Overview**
+- Total products, orders, users, and revenue
+- Recent order activity
+- Sales performance metrics
+- System health status
 
-| Service | URL | Description |
-|---------|-----|-------------|
-| 🏠 **Website** | http://localhost:8000 | Main BikerHUB website |
-| 🔧 **Backend** | http://localhost:5000 | API server |
-| 📚 **API Docs** | http://localhost:5000/api-docs | Interactive API documentation |
-| ✅ **Health** | http://localhost:5000/health | Server status check |
-| 🔐 **Auth API** | http://localhost:5000/api/auth | Authentication endpoints |
-| 👥 **Users API** | http://localhost:5000/api/users | User management |
-| 🚲 **Products API** | http://localhost:5000/api/products | Product catalog |
-| 📦 **Orders API** | http://localhost:5000/api/orders | Order management |
+### **Product Management**
+- Add new products with images and details
+- Edit existing product information
+- Manage inventory and stock levels
+- Product categorization and search
 
-## 🚨 **Troubleshooting**
+### **Order Management**
+- View all customer orders
+- Update order status (pending, processing, shipped, delivered)
+- Order filtering and search
+- Customer order history
 
-### **Port 8000 Not Accessible:**
+### **User Management**
+- Monitor user accounts and activity
+- User role management
+- Account status control
+- User analytics and insights
+
+### **Analytics & Reports**
+- Sales performance tracking
+- Top-selling products
+- Revenue analytics
+- Customer behavior insights
+
+## 👤 **User Profile Features**
+
+### **Personal Information**
+- Edit profile details (name, phone, bio)
+- Profile picture management
+- Account preferences
+- Privacy settings
+
+### **Order Management**
+- Complete order history
+- Order status tracking
+- Order details and receipts
+- Reorder functionality
+
+### **Wishlist System**
+- Save favorite products
+- Organize wishlist items
+- Quick add to cart
+- Wishlist sharing
+
+### **Address Management**
+- Multiple shipping addresses
+- Address editing and deletion
+- Default address selection
+- Address validation
+
+### **Security & Preferences**
+- Password change
+- Two-factor authentication
+- Notification preferences
+- Privacy controls
+
+## 🚀 **Deployment**
+
+### **Docker Deployment**
 ```bash
-# Check if port is in use
-lsof -i :8000
+# Start all services
+docker-compose up -d
 
-# Kill process if needed
-kill -9 <PID>
+# View logs
+docker-compose logs -f
 
-# Restart frontend server
-cd frontend
-python3 -m http.server 8000
+# Stop services
+docker-compose down
 ```
 
-### **Port 5000 Not Accessible:**
-```bash
-# Check if port is in use
-lsof -i :5000
+### **Production Deployment**
+- Configure environment variables
+- Set up SSL certificates
+- Configure reverse proxy (Nginx)
+- Set up monitoring and logging
+- Configure backup strategies
 
-# Kill process if needed
-kill -9 <PID>
-
-# Restart backend server
-cd backend
-node server.js
-```
-
-### **MongoDB Connection Issues:**
-```bash
-# Check MongoDB status
-brew services list | grep mongodb
-
-# Start MongoDB if not running
-brew services start mongodb-community
-```
-
-### **Option 1: Docker (Recommended)**
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Tson28/biker--shop.git
-   cd biker--shop
-   ```
-
-2. **Start all services**
-   ```bash
-   docker-compose up -d
-   ```
-
-3. **Access the application**
-   - Frontend: http://localhost
-   - Backend API: http://localhost:5000
-   - API Docs: http://localhost:5000/api-docs
-   - MongoDB Admin: http://localhost:8081
-   - Redis Admin: http://localhost:8082
-
-### **Option 2: Local Development**
-
-1. **Backend Setup**
-   ```bash
-   cd backend
-   npm install
-   cp .env.example .env
-   # Edit .env with your configuration
-   npm run dev
-   # Or run directly: node server.js
-   ```
-
-2. **Frontend Setup**
-   ```bash
-   cd frontend
-   # Option A: Open directly in browser
-   # Double-click index.html or open in browser
-   
-   # Option B: Use local server (recommended)
-   python3 -m http.server 8000
-   # Website will be available at: http://localhost:8000
-   ```
-
-## 📁 Project Structure
-
-```
-BikerHUB-Full-Stack-website-development-project/
-├── frontend/                    # Frontend application
-│   ├── index.html              # Homepage
-│   ├── bikes.html              # Product catalog
-│   ├── login.html              # Authentication
-│   ├── signup.html             # User registration
-│   ├── sell.html               # Sell your bike
-│   ├── checkout.html           # Checkout process
-│   ├── orders.html             # Order management
-│   ├── style.css               # Modern CSS with variables
-│   └── script.js               # ES6+ JavaScript classes
-├── backend/                     # Backend API
-│   ├── config/                 # Configuration files
-│   ├── controllers/            # Business logic
-│   ├── middleware/             # Custom middleware
-│   ├── models/                 # Database schemas
-│   ├── routes/                 # API endpoints
-│   ├── utils/                  # Utility functions
-│   ├── uploads/                # File uploads
-│   ├── logs/                   # Application logs
-│   ├── server.js               # Main application
-│   ├── package.json            # Dependencies
-│   └── Dockerfile              # Container configuration
-├── nginx/                      # Reverse proxy configuration
-├── docker-compose.yml          # Service orchestration
-├── .gitignore                  # Git ignore rules
-└── README.md                   # Project documentation
-```
-
-## 🔧 Configuration
-
-### **Environment Variables**
-
-Create environment files for different environments:
-
-```bash
-# Development
-cp backend/.env.example backend/.env
-
-# Production
-cp backend/.env.example backend/.env.production
-```
-
-### **Key Configuration Options**
-
-- **Database**: MongoDB connection and options
-- **Redis**: Caching and session storage
-- **JWT**: Authentication and security
-- **Email**: SMTP configuration for notifications
-- **Payment**: Stripe and PayPal integration
-- **Storage**: Cloudinary or AWS S3 for files
-- **Monitoring**: Sentry and New Relic integration
-
-## 📚 API Documentation
-
-### **Interactive API Docs**
-- **Swagger UI**: http://localhost:5000/api-docs
-- **OpenAPI Spec**: http://localhost:5000/api-docs.json
-
-### **Core Endpoints**
-- **Authentication**: `/api/auth/*`
-- **Users**: `/api/users/*`
-- **Products**: `/api/products/*`
-- **Orders**: `/api/orders/*`
-- **Payments**: `/api/payments/*`
-- **Uploads**: `/api/uploads/*`
-- **Analytics**: `/api/analytics/*`
-
-## 🧪 Testing
+## 🧪 **Testing**
 
 ### **Backend Testing**
 ```bash
 cd backend
-npm test                    # Run all tests
-npm run test:watch         # Watch mode
-npm run test:coverage      # Coverage report
+npm test
 ```
 
 ### **Frontend Testing**
+- Manual testing on multiple devices
+- Cross-browser compatibility
+- Performance testing
+- Accessibility testing
+
+## 📈 **Performance Optimization**
+
+### **Frontend**
+- Lazy loading of images
+- Code splitting and bundling
+- Service worker caching
+- Optimized assets
+
+### **Backend**
+- Database indexing
+- Query optimization
+- Caching strategies
+- Load balancing
+
+## 🔧 **Configuration**
+
+### **Environment Variables**
 ```bash
-cd frontend
-# Open in browser and test manually
-# Or use testing frameworks like Jest, Cypress
+# Backend
+NODE_ENV=production
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/bikerhub
+JWT_SECRET=your-secret-key
+REDIS_URL=redis://localhost:6379
+
+# Frontend
+API_BASE_URL=http://localhost:5000
 ```
 
-## 📊 Monitoring & Health
+## 📚 **API Documentation**
 
-### **Health Checks**
-- **Application**: `GET /health`
-- **Database**: `GET /health/db`
-- **Redis**: `GET /health/redis`
+### **Authentication Endpoints**
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `POST /api/auth/logout` - User logout
+- `GET /api/auth/verify` - Token verification
 
-### **Performance Metrics**
-- Request/response times
-- Database query performance
-- Memory usage and optimization
-- Error rates and tracking
+### **Product Endpoints**
+- `GET /api/products` - Get all products
+- `POST /api/products` - Create new product (admin)
+- `PUT /api/products/:id` - Update product (admin)
+- `DELETE /api/products/:id` - Delete product (admin)
 
-## 🚀 Deployment
+### **Order Endpoints**
+- `GET /api/orders` - Get all orders (admin)
+- `GET /api/orders/my-orders` - Get user orders
+- `POST /api/orders` - Create new order
+- `PUT /api/orders/:id/status` - Update order status
 
-### **Production Checklist**
-- [ ] Environment variables configured
-- [ ] SSL certificates installed
-- [ ] Database backups enabled
-- [ ] Monitoring and alerting
-- [ ] Log rotation configured
-- [ ] Health checks enabled
-- [ ] Rate limiting configured
+### **User Endpoints**
+- `GET /api/users/profile` - Get user profile
+- `PUT /api/users/profile` - Update user profile
+- `PUT /api/users/change-password` - Change password
+- `GET /api/users/wishlist` - Get user wishlist
 
-### **Deployment Options**
+## 🤝 **Contributing**
 
-1. **Docker Compose** (Recommended)
-   ```bash
-   docker-compose -f docker-compose.yml up -d
-   ```
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-2. **Kubernetes**
-   ```bash
-   kubectl apply -f k8s/
-   ```
-
-3. **Cloud Platforms**
-   - AWS ECS/Fargate
-   - Google Cloud Run
-   - Azure Container Instances
-   - DigitalOcean App Platform
-
-## 🔒 Security Features
-
-### **Authentication & Authorization**
-- JWT-based authentication
-- Role-based access control
-- Session management
-- Password policies
-
-### **Data Protection**
-- Input validation and sanitization
-- XSS and CSRF protection
-- SQL injection prevention
-- Rate limiting and DDoS protection
-
-### **Infrastructure Security**
-- Container security best practices
-- Network isolation
-- Secret management
-- Regular security updates
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our contributing guidelines:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-3. **Make your changes**
-4. **Add tests for new functionality**
-5. **Ensure all tests pass**
-6. **Submit a pull request**
-
-### **Development Guidelines**
-- Follow ES6+ best practices
-- Write comprehensive tests
-- Document new features
-- Use ESLint and Prettier
-- Follow conventional commits
-
-## 📄 License
+## 📄 **License**
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## 🆘 **Support**
 
-- **Documentation**: [API Docs](http://localhost:5000/api-docs)
-- **Issues**: [GitHub Issues](https://github.com/Tson28/biker--shop/issues)
-- **Email**: support@bikerhub.com
-- **Discord**: [Join our community](https://discord.gg/bikerhub)
+- 📧 Email: support@bikerhub.com
+- 📖 Documentation: [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
+- 🐛 Issues: [GitHub Issues](https://github.com/Tson28/biker--shop/issues)
 
-## 🔄 Changelog
+## 🎯 **Roadmap**
 
-### **v2.0.0** (Current)
-- **Modern Architecture**: ES6+ modules and async/await
-- **Enhanced Frontend**: Advanced UI components and animations
-- **Scalable Backend**: Performance monitoring and optimization
-- **Production Ready**: Docker, health checks, and monitoring
-- **Comprehensive Testing**: Jest framework and coverage
-- **API Documentation**: Interactive Swagger/OpenAPI docs
+### **Phase 1 (Current)**
+- ✅ Basic e-commerce functionality
+- ✅ User authentication system
+- ✅ Admin dashboard
+- ✅ User profile system
+- ✅ Product management
 
-### **v1.0.0**
-- Basic e-commerce functionality
-- User authentication and management
-- Product catalog and orders
-- Payment integration
-- File uploads
+### **Phase 2 (Next)**
+- 🔄 Advanced payment integration
+- 🔄 Real-time chat support
+- 🔄 Advanced analytics
+- 🔄 Mobile app development
+- 🔄 Multi-language support
 
-## 🌟 Acknowledgments
-
-- **Bike Community** - For inspiration and feedback
-- **Open Source Contributors** - For amazing tools and libraries
-- **Modern Web Standards** - For cutting-edge technologies
+### **Phase 3 (Future)**
+- 📋 AI-powered recommendations
+- 📋 Advanced inventory management
+- 📋 Supplier management system
+- 📋 Advanced reporting tools
+- 📋 Integration with external services
 
 ---
 
-**Built with ❤️ by the BikerHUB Team**
+**Made with ❤️ by the BikerHUB Team**
 
-[![GitHub stars](https://img.shields.io/github/stars/Tson28/biker--shop?style=social)](https://github.com/Tson28/biker--shop/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Tson28/biker--shop?style=social)](https://github.com/Tson28/biker--shop/network)
-[![GitHub issues](https://img.shields.io/github/issues/Tson28/biker--shop)](https://github.com/Tson28/biker--shop/issues)
-[![GitHub license](https://img.shields.io/github/license/Tson28/biker--shop)](https://github.com/Tson28/biker--shop/blob/main/LICENSE)
+*Transform your cycling business with the most advanced e-commerce platform for bicycle enthusiasts!*
